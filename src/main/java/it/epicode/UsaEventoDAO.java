@@ -1,19 +1,27 @@
 package it.epicode;
 
 import it.epicode.dao.EventoDAO;
-import it.epicode.entities.Evento;
-import it.epicode.entities.TipoEvento;
+import it.epicode.dao.LocationDAO;
+import it.epicode.dao.PartecipazioneDAO;
+import it.epicode.dao.PersonaDAO;
+import it.epicode.entities.*;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UsaEventoDAO {
     public static void main(String[] args) {
-        EventoDAO dao = new EventoDAO();
-        Evento e = new Evento(0, "concerto", LocalDate.of(2024, 11, 11), "concerto musicale", TipoEvento.PUBBLICO, 1000);
-        dao.save(e);
-        //  dao.delete(1);
-        Evento evento = new Evento();
-        evento = dao.getById(3);
-        System.out.println(evento);
+        EventoDAO eventoDAO = new EventoDAO();
+        PersonaDAO personaDAO = new PersonaDAO();
+        PartecipazioneDAO partecipazioneDAO = new PartecipazioneDAO();
+        LocationDAO locationDAO = new LocationDAO();
+        Persona persona= new Persona(1,"antonio","rossi","rgrr@fgdfgf.it",LocalDate.of(1900,12,12));
+        Persona nuovaPersona = new Persona(persona.getId(), persona.getNome(), persona.getCognome(), persona.getEmail(), persona.getDataDiNascita());
+        personaDAO.save(nuovaPersona);
+        Evento evento = new Evento(1,"concerto capodanno",LocalDate.of(2023,11,12),"concerto di capodanno",TipoEvento.PRIVATO,90);
+        eventoDAO.save(evento);
+        Partecipazione partecipazione=new Partecipazione(1,nuovaPersona,evento,Stato.CONFERMATA);
+        System.out.println(partecipazione);
     }
 }
