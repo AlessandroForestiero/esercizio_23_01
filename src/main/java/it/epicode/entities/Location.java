@@ -1,16 +1,19 @@
 package it.epicode.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "location")
 public class Location {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
     private String città;
+    @OneToMany(mappedBy = "location")
+    private List<Evento> eventi;
+    public Location(){}
 
     public Location(int id, String nome, String città) {
         this.id = id;
@@ -40,5 +43,13 @@ public class Location {
 
     public void setCittà(String città) {
         this.città = città;
+    }
+
+    public List<Evento> getEventi() {
+        return eventi;
+    }
+
+    public void setEventi(List<Evento> eventi) {
+        this.eventi = eventi;
     }
 }

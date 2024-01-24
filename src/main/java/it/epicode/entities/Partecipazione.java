@@ -9,10 +9,10 @@ public class Partecipazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "persona_id",nullable = false)
+    @JoinColumn(name = "persona_fk",nullable = false)
     private Persona persona;
     @ManyToOne
-    @JoinColumn(name = "evento_id", nullable = false)
+    @JoinColumn(name = "evento_fk", nullable = false)
     private Evento evento;
     private Stato stato;
 
@@ -54,5 +54,15 @@ public class Partecipazione {
 
     public void setStato(Stato stato) {
         this.stato = stato;
+    }
+
+    @Override
+    public String toString() {
+        return "Partecipazione{" +
+                "id=" + id +
+                ", persona=" + persona +
+                ", evento=" + evento +
+                ", stato=" + stato +
+                '}';
     }
 }

@@ -17,11 +17,17 @@ public class UsaEventoDAO {
         PartecipazioneDAO partecipazioneDAO = new PartecipazioneDAO();
         LocationDAO locationDAO = new LocationDAO();
         Persona persona= new Persona(1,"antonio","rossi","rgrr@fgdfgf.it",LocalDate.of(1900,12,12));
-        Persona nuovaPersona = new Persona(persona.getId(), persona.getNome(), persona.getCognome(), persona.getEmail(), persona.getDataDiNascita());
-        personaDAO.save(nuovaPersona);
+
+        personaDAO.save(persona);
+        Location location=new Location();
+        location.setCittà("Roma");
+        locationDAO.save(location);
         Evento evento = new Evento(1,"concerto capodanno",LocalDate.of(2023,11,12),"concerto di capodanno",TipoEvento.PRIVATO,90);
+        evento.setLocation(location);
         eventoDAO.save(evento);
-        Partecipazione partecipazione=new Partecipazione(1,nuovaPersona,evento,Stato.CONFERMATA);
-        System.out.println(partecipazione);
+
+        Partecipazione partecipazione=new Partecipazione(1,persona,evento,Stato.CONFERMATA);
+        partecipazioneDAO.save(partecipazione);
+
     }
 }
